@@ -1,0 +1,141 @@
+:root {
+  --color-background: #f4f5f7;
+  --color-border: #000000;
+  --color-text: #000000;
+  --color-placeholder: #111111;
+  --color-helper: #ff0000;
+
+  --color-button-disabled: #aca0eb;
+  --color-button-active: #7f6aee;
+  --color-button-text: #ffffff;
+
+  --font-main: Arial, "Noto Sans KR", sans-serif;
+
+  --header-height: 88px;
+  --form-width: 306px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-main);
+}
+
+.header {
+  height: var(--header-height);
+  border-bottom: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__title {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.login-page {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.login {
+  width: var(--form-width);
+  margin-top: 216px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login__title {
+  margin: 0 0 36px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 13px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-input {
+  width: 100%;
+  height: 29px;
+  padding: 0 10px;
+  border: 1px solid #000;
+  border-radius: 2px;
+  background-color: transparent;
+  font-size: 11px;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: var(--color-placeholder);
+  opacity: 1;
+}
+
+.form-input:focus {
+  border-color: #333333;
+}
+
+.helper-text {
+  min-height: 15px;
+  margin: 5px 0 0;
+  font-size: 11px;
+  line-height: 15px;
+  color: var(--color-helper);
+}
+
+.login-button {
+  width: 100%;
+  height: 29px;
+  margin-top: 4px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-button-disabled);
+  color: var(--color-button-text);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: not-allowed;
+}
+
+.login-button.is-active {
+  background-color: var(--color-button-active);
+  cursor: pointer;
+}
+
+.signup-button {
+  margin-top: 9px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #000;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.signup-button:hover {
+  text-decoration: underline;
+}

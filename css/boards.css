@@ -1,0 +1,149 @@
+.boards-page {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.header__profile-button {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.header__profile-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #111;
+}
+
+.boards {
+  width: 592px;
+  margin-top: 40px;
+}
+
+.boards__intro {
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.boards__intro p {
+  margin: 0;
+}
+
+.boards__action-area {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.write-button {
+  width: 138px;
+  height: 39px;
+  border: none;
+  border-radius: 16px;
+  background-color: #aca0eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.write-button:hover {
+  background-color: #7f6aee;
+}
+
+.board-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.board-card {
+  width: 100%;
+  height: 169px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.board-card__body {
+  height: 101px;
+  padding: 22px 26px 0;
+}
+
+.board-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.board-card__title {
+  max-width: 330px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.board-card__date {
+  flex-shrink: 0;
+  margin-top: 33px;
+  font-size: 14px;
+  color: #000000;
+}
+
+.board-card__meta {
+  display: flex;
+  gap: 10px;
+  margin-top: 0px;
+  font-size: 13px;
+}
+
+.board-card__footer {
+  height: 68px;
+  border-top: 1px solid #dddddd;
+  padding: 16px 26px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.board-card__author-image {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  flex-shrink: 0;
+}
+
+.board-card__author-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.loading {
+  display: none;
+  padding: 24px 0 40px;
+  text-align: center;
+  font-size: 13px;
+  color: #777777;
+}
+
+.loading.is-active {
+  display: block;
+}

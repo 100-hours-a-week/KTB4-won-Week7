@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>아무 말 대잔치 - 게시글 상세</title>
+
+  <link rel="stylesheet" href="../css/common.css" />
+  <link rel="stylesheet" href="../css/board-detail.css" />
+</head>
+<body>
+<header class="header">
+  <h1 class="header__title">아무 말 대잔치</h1>
+
+  <div class="header__profile">
+    <button type="button" class="header__profile-button" id="profileButton" aria-label="프로필 메뉴">
+      <span class="header__profile-image"></span>
+    </button>
+
+    <div class="profile-dropdown" id="profileDropdown">
+      <button type="button" class="profile-dropdown__item" id="editProfileMenu">
+        회원정보수정
+      </button>
+      <button type="button" class="profile-dropdown__item" id="editPasswordMenu">
+        비밀번호수정
+      </button>
+      <button type="button" class="profile-dropdown__item" id="logoutMenu">
+        로그아웃
+      </button>
+    </div>
+  </div>
+</header>
+
+  <main class="board-detail-page">
+    <article class="board-detail">
+      <section class="board-header">
+        <h2 class="board-title" id="boardTitle">제목 1</h2>
+
+        <div class="board-meta-row">
+          <div class="author">
+            <div class="author__image"></div>
+            <strong class="author__name" id="boardAuthor">더미 작성자 1</strong>
+          </div>
+
+          <time class="board-date" id="boardDate">2021-01-01 00:00:00</time>
+
+          <div class="board-actions">
+            <button type="button" class="small-button" id="editBoardButton">수정</button>
+            <button type="button" class="small-button" id="deleteBoardButton">삭제</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="board-content">
+        <div class="board-image" aria-label="게시글 이미지 영역"></div>
+
+        <p class="board-text" id="boardContent">
+          무엇을 얘기할까요? 아무말이라면, 삶은 항상 놀라운 모험이라고 생각합니다. 우리는 매일 새로운 경험을 하고 배우며 성장합니다. 때로는 어려움과 도전이 있지만, 그것들이 우리를 더 강하고 지혜롭게 만듭니다. 또한 우리는 주변의 사람들과 연결되며 사랑과 지지를 받습니다. 그래서 우리의 삶은 소중하고 의미가 있습니다.
+          <br />
+          자연도 아름다운 이야기입니다. 우리 주변의 자연은 끝없는 아름다움과 신비로움을 담고 있습니다. 산, 바다, 숲, 하늘 등 모든 것이 우리를 놀라게 만들고 감동시킵니다. 자연은 우리의 생각과 안정감을 주며 우리에게 힘을 주는 곳입니다.
+          <br />
+          마지막으로, 지식은 항상 탐구는 항상 흥미로운 여정입니다. 우리는 끝없는 지식의 바다에서 배우고 발견할 수 있으며, 이것이 우리를 더 깊이 이해하고 세상을 더 넓게 보게 해줍니다.
+        </p>
+      </section>
+
+      <section class="board-stats">
+        <button type="button" class="stat-card stat-card--like" id="likeButton">
+          <strong id="likeCount"></strong>
+          <span>좋아요수</span>
+        </button>
+
+        <div class="stat-card">
+          <strong id="viewCount"></strong>
+          <span>조회수</span>
+        </div>
+
+        <div class="stat-card">
+          <strong id="commentCount"></strong>
+          <span>댓글</span>
+        </div>
+      </section>
+
+      <section class="comment-write">
+        <textarea
+          id="commentTextarea"
+          class="comment-textarea"
+          placeholder="댓글을 남겨주세요!"
+        ></textarea>
+
+        <div class="comment-submit-row">
+          <button type="button" class="comment-submit-button" id="commentSubmitButton" disabled>
+            댓글 등록
+          </button>
+        </div>
+      </section>
+
+      <section class="comment-list" id="commentList" aria-label="댓글 목록">
+        <!-- JS에서 댓글 렌더링 -->
+      </section>
+    </article>
+  </main>
+
+  <div class="modal-backdrop" id="boardDeleteModal" aria-hidden="true">
+    <div class="modal">
+      <h3 class="modal__title">게시글을 삭제하시겠습니까?</h3>
+      <p class="modal__description">삭제한 내용은 복구 할 수 없습니다.</p>
+
+      <div class="modal__actions">
+        <button type="button" class="modal-button modal-button--cancel" id="cancelBoardDeleteButton">
+          취소
+        </button>
+        <button type="button" class="modal-button modal-button--confirm" id="confirmBoardDeleteButton">
+          확인
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="commentDeleteModal" aria-hidden="true">
+    <div class="modal">
+      <h3 class="modal__title">댓글을 삭제하시겠습니까?</h3>
+      <p class="modal__description">삭제한 내용은 복구 할 수 없습니다.</p>
+
+      <div class="modal__actions">
+        <button type="button" class="modal-button modal-button--cancel" id="cancelCommentDeleteButton">
+          취소
+        </button>
+        <button type="button" class="modal-button modal-button--confirm" id="confirmCommentDeleteButton">
+          확인
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../js/board-detail.js"></script>
+  <script src="../js/profile-dropdown.js"></script>
+</body>
+</html>

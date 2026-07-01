@@ -1,0 +1,150 @@
+.header__profile-button {
+  position: absolute;
+  left: calc(50% + 220px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  overflow: hidden;
+}
+
+.header__profile-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #111111;
+}
+
+.board-edit-page {
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.board-edit {
+  width: 405px;
+  margin-top: 24px;
+}
+
+.board-edit__title {
+  margin: 0 0 46px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.board-edit-form {
+  width: 100%;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.title-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 10px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: transparent;
+  outline: none;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.content-textarea {
+  width: 100%;
+  height: 185px;
+  padding: 12px 10px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.helper-text {
+  min-height: 16px;
+  margin: 6px 0 0;
+  color: var(--color-helper);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.image-upload-group {
+  width: 100%;
+  padding: 0 10px 14px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+}
+
+.image-upload-group .form-label {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.image-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-select-button {
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  background-color: #efefef;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.file-name {
+  font-size: 11px;
+  color: #000000;
+}
+
+.image-input {
+  display: none;
+}
+
+.submit-button {
+  display: block;
+  width: 250px;
+  height: 31px;
+  margin: 10px auto 0;
+  border: none;
+  border-radius: 4px;
+  background-color: #aca0eb;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: not-allowed;
+}
+
+.submit-button.is-active {
+  background-color: #7f6aee;
+  cursor: pointer;
+}

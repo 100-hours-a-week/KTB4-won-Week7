@@ -73,28 +73,24 @@ boardCreateForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  const formData = new FormData();
-  formData.append("title", titleInput.value.trim());
-  formData.append("content", contentTextarea.value.trim());
-
   if (selectedImage) {
     formData.append("image", selectedImage);
   }
 
   try {
-    /*
-      백엔드 API 연동 시 예시
-
       const response = await fetch("http://localhost:8080/api/boards", {
         method: "POST",
         credentials: "include",
-        body: formData,
+        body: JSON.stringify({
+          title: titleInput.value.trim(),
+          content: contentTextarea.value.trim(),
+          image: selectedImage ? selectedImage.name : null
+        }),
       });
 
       if (!response.ok) {
         throw new Error("BOARD_CREATE_FAILED");
       }
-    */
 
     alert("게시글이 등록되었습니다.");
     window.location.href = "./boards.html";

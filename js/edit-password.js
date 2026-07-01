@@ -1,5 +1,3 @@
-const emailInput = document.querySelector("#email");
-
 const profileButton = document.querySelector("#profileButton");
 
 const editPasswordForm = document.querySelector("#editPasswordForm");
@@ -111,12 +109,10 @@ editPasswordForm.addEventListener("submit", async (event) => {
   }
 
   try {
-    /*
-      백엔드 API 연동 시 예시
-
-      const response = await fetch("http://localhost:8080/api/users/password", {
-        method: "PATCH",
+      const response = await fetch("http://localhost:8080/users/password", {
+        method: "PUT",
         headers: {
+          "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
           "Content-Type": "application/json",
         },
         credentials: "include",
@@ -128,7 +124,6 @@ editPasswordForm.addEventListener("submit", async (event) => {
       if (!response.ok) {
         throw new Error("PASSWORD_EDIT_FAILED");
       }
-    */
 
     showToast();
 
@@ -138,8 +133,4 @@ editPasswordForm.addEventListener("submit", async (event) => {
   } catch (error) {
     alert("비밀번호 수정에 실패했습니다.");
   }
-});
-
-profileButton.addEventListener("click", () => {
-  window.location.href = "./profile.html";
 });

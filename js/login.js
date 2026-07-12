@@ -1,4 +1,5 @@
 import { validateEmailForm, validatePasswordForm } from "../util/validation.js";  // validation.js에서 검증 함수 가져오기
+import { loginUser } from "./api/user-api.js";
 
 // GPT로 생성한 HTML의 태그에 따라 querySelector로 요소를 선택
 const loginForm = document.querySelector("#loginForm");
@@ -82,24 +83,14 @@ const login = async (event) => {
   const email = emailInput.value;       
   const password = passwordInput.value; // 사용자가 입력한 값으로 로그인 요청.
   try {
-      const response = await fetch("http://localhost:8080/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-
-      if (!response.ok) {   //응답이 200번대가 아닌 경우 에러.
-        throw new Error("LOGIN_FAILED");
-      }
+      loginButton.disabled = true;
+      await loginUser({ email, password });
 
     window.location.href = "./pages/boards.html";
   } catch (error) {
+    console.error(error);
     passwordHelper.textContent = "*아이디 또는 비밀번호를 확인해주세요";
+    updateLoginButton();
   }
 };
 

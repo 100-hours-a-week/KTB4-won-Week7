@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>아무 말 대잔치 - 게시글 작성</title>
+  <title>크맵 - 사고 사례 등록</title>
 
   <link rel="stylesheet" href="../css/common.css" />
   <link rel="stylesheet" href="../css/board-create.css" />
@@ -14,7 +14,7 @@
       ‹
     </button>
 
-    <h1 class="header__title">아무 말 대잔치</h1>
+    <h1 class="header__title">크맵</h1>
 
     <button type="button" class="header__profile-button" id="profileButton" aria-label="프로필 메뉴">
       <span class="header__profile-image"></span>
@@ -23,7 +23,7 @@
 
   <main class="board-create-page">
     <section class="board-create">
-      <h2 class="board-create__title">게시글 작성</h2>
+      <h2 class="board-create__title">사고 사례 등록</h2>
 
       <form class="board-create-form" id="boardCreateForm" novalidate>
         <div class="form-group">
@@ -32,7 +32,7 @@
             type="text"
             id="title"
             class="title-input"
-            placeholder="제목을 입력해주세요. (최대 26글자)"
+            placeholder="예: 비보호 좌회전 중 직진 차량과 충돌했습니다"
             maxlength="26"
           />
         </div>
@@ -42,13 +42,13 @@
           <textarea
             id="content"
             class="content-textarea"
-            placeholder="내용을 입력해주세요."
+            placeholder="사고 당시 도로 상황, 진행 방향, 신호 상태 등을 자세히 적어주세요."
           ></textarea>
           <p class="helper-text" id="formHelper"></p>
         </div>
 
         <div class="image-upload-group">
-          <label for="imageInput" class="form-label">이미지</label>
+          <label for="imageInput" class="form-label">사고 현장 사진</label>
 
           <div class="image-upload-row">
             <label for="imageInput" class="file-select-button">파일 선택</label>
@@ -64,12 +64,12 @@
         </div>
 
         <button type="submit" class="submit-button" id="submitButton" disabled>
-          완료
+          사례 등록하기
         </button>
       </form>
     </section>
   </main>
 
-  <script src="../js/board-create.js"></script>
+  <script type="module" src="../js/board-create.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+import { updateBoard } from "./api/board-api.js";
+
 const backButton = document.querySelector("#backButton");
 const profileButton = document.querySelector("#profileButton");
 
@@ -13,7 +15,7 @@ let selectedImage = null;
 
 function getBoardIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  return params.get("id");
+  return params.get("boardId") ?? params.get("id");
 }
 
 function isFormFilled() {
@@ -80,34 +82,30 @@ boardEditForm.addEventListener("submit", async (event) => {
 
   const boardId = getBoardIdFromUrl();
 
-  if (selectedImage) {
-    formData.append("image", selectedImage);
+  if (!boardId) {
+    formHelper.textContent = "*수정할 게시글 ID가 없습니다.";
+    return;
   }
 
   try {
-      const response = await fetch(`http://localhost:8080/api/boards/${boardId}`, {
-        method: "PATCH",
-        credentials: "include",
-        body: JSON.stringify({
+      submitButton.disabled = true;
+      await updateBoard(boardId, {
           title: titleInput.value.trim(),
           content: contentTextarea.value.trim(),
           image: selectedImage ? selectedImage.name : null
-        }),
       });
-
-      if (!response.ok) {
-        throw new Error("BOARD_EDIT_FAILED");
-      }
 
     alert("게시글이 수정되었습니다.");
 
     if (boardId) {
-      window.location.href = `./board-detail.html?id=${boardId}`;
+      window.location.href = `./board-detail.html?boardId=${boardId}`;
     } else {
       window.location.href = "./board-detail.html";
     }
   } catch (error) {
+    console.error(error);
     alert("게시글 수정에 실패했습니다.");
+    updateSubmitButtonState();
   }
 });
 
@@ -115,14 +113,12 @@ backButton.addEventListener("click", () => {
   const boardId = getBoardIdFromUrl();
 
   if (boardId) {
-    window.location.href = `./board-detail.html?id=${boardId}`;
+    window.location.href = `./board-detail.html?boardId=${boardId}`;
   } else {
     window.location.href = "./board-detail.html";
   }
 });
 
-profileButton.addEventListener("click", () => {
-  window.location.href = "./profile.html";
-});
+profileButton?.addEventListener("click", () => { window.location.href = "./edit-profile.html"; });
 
 updateSubmitButtonState();

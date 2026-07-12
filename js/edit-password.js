@@ -1,3 +1,5 @@
+import { updatePassword } from "./api/user-api.js";
+
 const profileButton = document.querySelector("#profileButton");
 
 const editPasswordForm = document.querySelector("#editPasswordForm");
@@ -109,21 +111,8 @@ editPasswordForm.addEventListener("submit", async (event) => {
   }
 
   try {
-      const response = await fetch("http://localhost:8080/users/password", {
-        method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          password: passwordInput.value,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("PASSWORD_EDIT_FAILED");
-      }
+      submitButton.disabled = true;
+      await updatePassword(passwordInput.value);
 
     showToast();
 
@@ -131,6 +120,9 @@ editPasswordForm.addEventListener("submit", async (event) => {
     passwordConfirmInput.value = "";
     updateSubmitButtonState();
   } catch (error) {
+    console.error(error);
     alert("비밀번호 수정에 실패했습니다.");
+  } finally {
+    updateSubmitButtonState();
   }
 });

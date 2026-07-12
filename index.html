@@ -3,16 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>아무 말 대잔치 - 로그인</title>
+  <title>크맵 - 로그인</title>
+  <link rel="stylesheet" href="./css/common.css" />
   <link rel="stylesheet" href="./css/login.css" />
 </head>
 <body>
   <header class="header">
-    <h1 class="header__title">아무 말 대잔치</h1>
+    <h1 class="header__title">크맵</h1>
   </header>
 
   <main class="login-page">
-    <section class="login">
+    <div class="login-shell">
+      <section class="login-brand">
+        <div class="brand-logo">
+          <svg class="brand-logo__mark" viewBox="0 0 64 76" aria-hidden="true">
+            <path fill="#f97316" d="M32 2C15.4 2 2 15.4 2 32c0 22.5 30 42 30 42s30-19.5 30-42C62 15.4 48.6 2 32 2Z"/>
+            <circle cx="32" cy="31" r="17" fill="#fff7ed"/>
+            <path d="M27 44 31 18h3l4 26M30 32h6" fill="none" stroke="#f97316" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <strong class="brand-logo__name">크맵</strong>
+        </div>
+        <div class="login-brand__copy">
+          <p class="login-brand__eyebrow">교통사고 과실 투표 커뮤니티</p>
+          <h2>사고의 순간을 공유하고,<br />함께 판단해 보세요.</h2>
+          <p class="login-brand__description">사진과 사고 상황을 확인하고 과실이 더 크다고 생각하는 차량에 투표해 보세요. 다양한 운전자의 의견이 더 안전한 도로를 만듭니다.</p>
+          <div class="login-brand__features"><span>📍 사고 사례</span><span>🗳 과실 투표</span><span>🔥 HOT 토론</span></div>
+        </div>
+      </section>
+      <section class="login">
+      <p class="login__welcome">다시 만나 반가워요!</p>
       <h2 class="login__title">로그인</h2>
 
       <form class="login-form" id="loginForm" novalidate>
@@ -45,13 +64,10 @@
         </button>
       </form>
 
-      <button type="button" class="signup-button" id="signupButton">
-        회원가입
-      </button>
+      <div class="signup-area"><span>아직 계정이 없나요?</span><button type="button" class="signup-button" id="signupButton">회원가입</button></div>
     </section>
+    </div>
   </main>
-  <link rel="stylesheet" href="./css/common.css" />
-  <link rel="stylesheet" href="./css/login.css" />
 <script type = "module"src="./js/login.js"></script>
 </body>
 </html>

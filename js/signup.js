@@ -1,4 +1,5 @@
 import { validateEmailForm, validateNicknameForm, validatePasswordForm, validatePasswordConfirmForm } from "../util/validation.js";
+import { checkEmailAvailability, checkNicknameAvailability, signupUser } from "./api/user-api.js";
 
 const backButton = document.querySelector("#backButton");
 const signupForm = document.querySelector("#signupForm");
@@ -22,6 +23,7 @@ const signupButton = document.querySelector("#signupButton");
 const loginLinkButton = document.querySelector("#loginLinkButton");
 
 let selectedProfileImage = null;  //프로필 이미지 재설정이 가능
+let profilePreviewUrl = null;
 
 function validateProfile() {
   if (!selectedProfileImage) {
@@ -40,13 +42,13 @@ async function validateEmail() {
   if(emailHelper.textContent.length === 0){ //불필요한 서버 요청을 줄이기 위해 이메일 형식이 올바른 경우에만 서버 요청
     try{
     //백엔드 연결 후 중복 이메일 검사
-    const response = await fetch(`http://localhost:8080/users/email/check?email=${encodeURIComponent(email)}`);
-    const data = await response.json();
+    const data = await checkEmailAvailability(email);
     
     emailHelper.textContent = data.available === true ? "" : `*중복된 이메일입니다.`;
     
     } catch(error){
-      console.log(`요청 실패: ${error}`);
+      console.error(error);
+      emailHelper.textContent = "*이메일 중복 확인에 실패했습니다.";
     }
   }
   if(emailHelper.textContent.length === 0){
@@ -88,14 +90,14 @@ async function validateNickname() {
   if(nicknameHelper.textContent.length === 0){  //불필요한 서버 요청을 줄이기 위해 닉네임 형식이 올바른 경우에만 서버 요청
       try{
       //백엔드 연결 후 중복 닉네임 검사
-      const response = await fetch(`http://localhost:8080/users/nickname/check?nickname=${encodeURIComponent(nickname)}`);
-      const data = await response.json();
+      const data = await checkNicknameAvailability(nickname);
       
       nicknameHelper.textContent = data.available === true ? "" : `*중복된 닉네임입니다.`;
       
     
     } catch(error){
-      console.log(`요청 실패: ${error}`);
+      console.error(error);
+      nicknameHelper.textContent = "*닉네임 중복 확인에 실패했습니다.";
     }
   }
   if(nicknameHelper.textContent.length === 0){
@@ -138,6 +140,10 @@ function updateSignupButtonState() {
 
 profileImageInput.addEventListener("change", () => {
   const file = profileImageInput.files[0];
+  if (profilePreviewUrl) {
+    URL.revokeObjectURL(profilePreviewUrl);
+    profilePreviewUrl = null;
+  }
   
   if (!file) {
     selectedProfileImage = null;
@@ -149,16 +155,16 @@ profileImageInput.addEventListener("change", () => {
   
   selectedProfileImage = file;
 
-  const imageUrl = URL.createObjectURL(file);
-  profilePreview.src = imageUrl;
+  profilePreviewUrl = URL.createObjectURL(file);
+  profilePreview.src = profilePreviewUrl;
   profileUploader.classList.add("has-image");
 
   validateProfile();
   updateSignupButtonState();
 });
 
-emailInput.addEventListener("blur", () => {
-  validateEmail();
+emailInput.addEventListener("blur", async () => {
+  await validateEmail();
   updateSignupButtonState();
 });
 
@@ -177,8 +183,8 @@ passwordConfirmInput.addEventListener("blur", () => {
   updateSignupButtonState();
 });
 
-nicknameInput.addEventListener("blur", () => {
-  validateNickname();
+nicknameInput.addEventListener("blur", async () => {
+  await validateNickname();
   updateSignupButtonState();
 });
 
@@ -191,10 +197,10 @@ const signup = async (event) => {
   event.preventDefault();
 
   const isProfileAvailable = validateProfile();
-  const isEmailAvailable = validateEmail();
+  const isEmailAvailable = await validateEmail();
   const isPasswordAvailable = validatePassword();
   const isPasswordConfirmAvailable = validatePasswordConfirm();
-  const isNicknameAvailable = validateNickname();
+  const isNicknameAvailable = await validateNickname();
 
   if (
     !isProfileAvailable ||
@@ -210,24 +216,15 @@ const signup = async (event) => {
   const email = emailInput.value;
   const password = passwordInput.value;
   const nickname = nicknameInput.value;
-  const profileImage = selectedProfileImage;
+  const profileImage = selectedProfileImage?.name ?? null;
 
   try {
-    const response = await fetch("http://localhost:8080/users/signup", {
-      method: "POST",
-      body: JSON.stringify({ email, password, nickname, profileImage }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error("SIGNUP_FAILED");
-    }
+    await signupUser({ email, password, nickname, profileImage });
 
     alert("회원가입이 완료되었습니다.");
     window.location.href = "../index.html";   //로그인 화면으로 리다이렉션
   } catch (error) {
+    console.error(error);
     alert("회원가입에 실패했습니다.");
   }
 }

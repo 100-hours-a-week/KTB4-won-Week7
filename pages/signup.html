@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>아무 말 대잔치 - 회원가입</title>
+  <title>크맵 - 회원가입</title>
 
   <link rel="stylesheet" href="../css/common.css" />
   <link rel="stylesheet" href="../css/signup.css" />
@@ -13,11 +13,17 @@
     <button type="button" class="header__back-button" id="backButton" aria-label="뒤로가기">
       ‹
     </button>
-    <h1 class="header__title">아무 말 대잔치</h1>
+    <h1 class="header__title">크맵</h1>
   </header>
 
   <main class="signup-page">
+    <div class="account-shell account-shell--signup">
+      <aside class="account-brand">
+        <div class="account-brand__logo"><span class="account-brand__mark"></span><strong>크맵</strong></div>
+        <div><p class="account-brand__eyebrow">크맵과 함께 시작하세요</p><h2>도로 위 경험이<br />모두의 기준이 됩니다.</h2><p>사고 사례를 공유하고 다양한 운전자의 판단을 만나보세요.</p></div>
+      </aside>
     <section class="signup">
+      <p class="account-form__eyebrow">새 계정 만들기</p>
       <h2 class="signup__title">회원가입</h2>
 
       <form class="signup-form" id="signupForm" novalidate>
@@ -51,6 +57,18 @@
         </div>
 
         <div class="form-group">
+          <label for="nickname" class="form-label">닉네임*</label>
+          <input
+            type="text"
+            id="nickname"
+            class="form-input"
+            placeholder="닉네임을 입력하세요"
+            autocomplete="nickname"
+          />
+          <p class="helper-text" id="nicknameHelper"></p>
+        </div>
+
+        <div class="form-group">
           <label for="password" class="form-label">비밀번호*</label>
           <input
             type="password"
@@ -74,18 +92,6 @@
           <p class="helper-text" id="passwordConfirmHelper"></p>
         </div>
 
-        <div class="form-group">
-          <label for="nickname" class="form-label">닉네임*</label>
-          <input
-            type="text"
-            id="nickname"
-            class="form-input"
-            placeholder="닉네임을 입력하세요"
-            autocomplete="nickname"
-          />
-          <p class="helper-text" id="nicknameHelper"></p>
-        </div>
-
         <button type="submit" class="signup-button" id="signupButton" disabled>
           회원가입
         </button>
@@ -95,6 +101,7 @@
         로그인하러 가기
       </button>
     </section>
+    </div>
   </main>
 
   <script type="module" src="../js/signup.js"></script>

@@ -1,3 +1,5 @@
+import { logoutUser } from "./api/user-api.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const profileButton = document.querySelector("#profileButton");
   const profileDropdown = document.querySelector("#profileDropdown");
@@ -39,8 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "./edit-password.html";
   });
 
-  logoutMenu?.addEventListener("click", () => {
-    localStorage.removeItem("accessToken");
-    window.location.href = "../index.html";
+  logoutMenu?.addEventListener("click", async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      window.location.href = "../index.html";
+    }
   });
 });

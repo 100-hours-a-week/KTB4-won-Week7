@@ -1,149 +1,33 @@
-.boards-page {
-  min-height: calc(100vh - var(--header-height));
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.header__profile-button {
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: transparent;
-  overflow: hidden;
-}
-
-.header__profile-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #111;
-}
-
-.boards {
-  width: 592px;
-  margin-top: 40px;
-}
-
-.boards__intro {
-  margin-bottom: 12px;
-  text-align: center;
-  font-size: 24px;
-  line-height: 1.35;
-}
-
-.boards__intro p {
-  margin: 0;
-}
-
-.boards__action-area {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 16px;
-}
-
-.write-button {
-  width: 138px;
-  height: 39px;
-  border: none;
-  border-radius: 16px;
-  background-color: #aca0eb;
-  color: #ffffff;
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.write-button:hover {
-  background-color: #7f6aee;
-}
-
-.board-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.board-card {
-  width: 100%;
-  height: 169px;
-  border-radius: 12px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.board-card__body {
-  height: 101px;
-  padding: 22px 26px 0;
-}
-
-.board-card__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-}
-
-.board-card__title {
-  max-width: 330px;
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.2;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.board-card__date {
-  flex-shrink: 0;
-  margin-top: 33px;
-  font-size: 14px;
-  color: #000000;
-}
-
-.board-card__meta {
-  display: flex;
-  gap: 10px;
-  margin-top: 0px;
-  font-size: 13px;
-}
-
-.board-card__footer {
-  height: 68px;
-  border-top: 1px solid #dddddd;
-  padding: 16px 26px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.board-card__author-image {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: #d9d9d9;
-  flex-shrink: 0;
-}
-
-.board-card__author-name {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.loading {
-  display: none;
-  padding: 24px 0 40px;
-  text-align: center;
-  font-size: 13px;
-  color: #777777;
-}
-
-.loading.is-active {
-  display: block;
-}
+.boards-page { min-height: calc(100vh - var(--header-height)); padding: 54px 24px 80px; }
+.boards { width: min(100%, var(--content-width)); margin: 0 auto; }
+.boards__hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 34px; }
+.boards__intro { margin: 0; text-align: left; }
+.boards__eyebrow { margin: 0 0 10px; color: var(--color-primary); font-size: 13px; font-weight: 800; }
+.boards__intro h2 { margin: 0 0 10px; font-size: clamp(28px,4vw,40px); line-height: 1.2; letter-spacing: -.045em; }
+.boards__intro p { margin: 0; color: var(--color-muted); font-size: 15px; }
+.write-button { height: 46px; padding: 0 20px; border: 0; border-radius: 12px; background: var(--color-primary); color: #fff; font-size: 14px; font-weight: 800; box-shadow: 0 8px 18px rgba(249,115,22,.23); }
+.write-button:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
+.board-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--color-line); }
+.board-tabs { display: flex; gap: 4px; }
+.board-tab { position: relative; height: 48px; padding: 0 18px; border: 0; background: transparent; color: var(--color-muted); font-size: 14px; font-weight: 700; }
+.board-tab.is-active { color: var(--color-text); }
+.board-tab.is-active::after { content:""; position:absolute; left:12px; right:12px; bottom:-1px; height:3px; border-radius:3px 3px 0 0; background:var(--color-primary); }
+.board-count { color: var(--color-muted); font-size: 13px; }
+.board-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.board-card { min-width: 0; border: 1px solid var(--color-line); border-radius: var(--radius-md); background: #fff; box-shadow: var(--shadow-card); overflow: hidden; cursor: pointer; transition: .2s ease; }
+.board-card:hover { transform: translateY(-3px); border-color: #cbd8ec; box-shadow: 0 14px 34px rgba(30,45,70,.11); }
+.board-card--hot { border-color: #ffd6d2; }
+.board-card__thumb { position: relative; height: 176px; background: linear-gradient(135deg,#dce5ef,#aab8c8); overflow:hidden; }
+.board-card__thumb::before { content:"사고 현장 사진"; position:absolute; inset:0; display:grid; place-items:center; color:#fff; font-size:13px; font-weight:700; text-shadow:0 1px 4px rgba(0,0,0,.18); }
+.board-card__thumb .hot-badge { position:absolute; top:12px; left:12px; z-index:1; }
+.board-card__body { padding: 20px; }
+.board-card__title { margin: 0 0 9px; font-size: 18px; line-height: 1.4; letter-spacing: -.025em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.board-card__summary { height: 42px; margin: 0 0 18px; color: var(--color-muted); font-size: 13px; line-height: 1.6; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.board-card__meta { display:flex; gap:12px; color:var(--color-muted); font-size:12px; }
+.board-card__footer { border-top:1px solid var(--color-line); padding:14px 20px; display:flex; align-items:center; gap:10px; }
+.board-card__author-image { width:28px; height:28px; border-radius:50%; background:linear-gradient(145deg,#fed7aa,#f97316); }
+.board-card__author-name { font-size:13px; font-weight:700; }
+.board-card__date { margin-left:auto; color:var(--color-muted); font-size:12px; }
+.loading,.board-empty { grid-column:1/-1; padding:60px 0; text-align:center; color:var(--color-muted); font-size:14px; }
+.loading { display:none; }.loading.is-active{display:block;}
+@media(max-width:720px){.boards-page{padding:32px 16px 60px}.boards__hero{align-items:flex-start;flex-direction:column}.write-button{width:100%}.board-list{grid-template-columns:1fr}.board-card__thumb{height:150px}.board-count{display:none}}

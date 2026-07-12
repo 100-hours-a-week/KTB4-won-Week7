@@ -1,3 +1,5 @@
+import { createBoard } from "./api/board-api.js";
+
 const backButton = document.querySelector("#backButton");
 const profileButton = document.querySelector("#profileButton");
 
@@ -73,29 +75,20 @@ boardCreateForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  if (selectedImage) {
-    formData.append("image", selectedImage);
-  }
-
   try {
-      const response = await fetch("http://localhost:8080/api/boards", {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({
+      submitButton.disabled = true;
+      await createBoard({
           title: titleInput.value.trim(),
           content: contentTextarea.value.trim(),
           image: selectedImage ? selectedImage.name : null
-        }),
       });
-
-      if (!response.ok) {
-        throw new Error("BOARD_CREATE_FAILED");
-      }
 
     alert("게시글이 등록되었습니다.");
     window.location.href = "./boards.html";
   } catch (error) {
+    console.error(error);
     alert("게시글 등록에 실패했습니다.");
+    updateSubmitButtonState();
   }
 });
 
@@ -103,6 +96,4 @@ backButton.addEventListener("click", () => {
   window.location.href = "./boards.html";
 });
 
-profileButton.addEventListener("click", () => {
-  window.location.href = "./profile.html";
-});
+profileButton?.addEventListener("click", () => { window.location.href = "./edit-profile.html"; });

@@ -1,22 +1,19 @@
 export function formatCount(count) {
-  if (count >= 100000) {
-    return `${Math.floor(count / 1000)}k`;
+  const numericCount = Number(count);
+  if (!Number.isFinite(numericCount)) return "0";
+  if (numericCount >= 1000) {
+    const compactCount = Math.floor(numericCount / 100) / 10;
+    return `${Number.isInteger(compactCount) ? compactCount.toFixed(0) : compactCount}k`;
   }
-
-  if (count >= 10000) {
-    return `${Math.floor(count / 1000)}k`;
-  }
-
-  if (count >= 1000) {
-    return `${Math.floor(count / 1000)}k`;
-  }
-
-  return String(count);
+  return String(Math.max(0, numericCount));
 }
 
 export function parseJwt(jwtToken) {
-  const base64Url = jwtToken.split(".")[1];
-    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  if (typeof jwtToken !== "string") return null;
+  const parts = jwtToken.split(".");
+  if (parts.length !== 3 || !parts[1]) return null;
+  const base64Url = parts[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(base64Url.length / 4) * 4, "=");
 
     const jsonPayload = decodeURIComponent(
         atob(base64)
@@ -32,6 +29,7 @@ export function parseJwt(jwtToken) {
 
 export function formatDateTime(timestamp) {
     const date = new Date(timestamp);
+    if (Number.isNaN(date.getTime())) return "";
 
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");

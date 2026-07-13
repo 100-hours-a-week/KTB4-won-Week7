@@ -10,14 +10,25 @@ const imageInput = document.querySelector("#imageInput");
 const fileName = document.querySelector("#fileName");
 const formHelper = document.querySelector("#formHelper");
 const submitButton = document.querySelector("#submitButton");
+const voteEnabledInput = document.querySelector("#voteEnabled");
+const voteFields = document.querySelector("#voteFields");
+const voteQuestionInput = document.querySelector("#voteQuestion");
+const voteOptionAInput = document.querySelector("#voteOptionA");
+const voteOptionBInput = document.querySelector("#voteOptionB");
+const voteHelper = document.querySelector("#voteHelper");
 
 let selectedImage = null;
 
 function isFormFilled() {
   const title = titleInput.value.trim();
   const content = contentTextarea.value.trim();
+  const isVoteFilled = !voteEnabledInput.checked || (
+    voteQuestionInput.value.trim().length > 0 &&
+    voteOptionAInput.value.trim().length > 0 &&
+    voteOptionBInput.value.trim().length > 0
+  );
 
-  return title.length > 0 && content.length > 0;
+  return title.length > 0 && content.length > 0 && isVoteFilled;
 }
 
 function updateSubmitButtonState() {
@@ -40,7 +51,17 @@ function validateForm() {
     return false;
   }
 
+  if (voteEnabledInput.checked && (
+    !voteQuestionInput.value.trim() ||
+    !voteOptionAInput.value.trim() ||
+    !voteOptionBInput.value.trim()
+  )) {
+    voteHelper.textContent = "*투표 질문과 두 선택지를 모두 작성해주세요.";
+    return false;
+  }
+
   formHelper.textContent = "";
+  voteHelper.textContent = "";
   return true;
 }
 
@@ -53,6 +74,21 @@ titleInput.addEventListener("input", () => {
 });
 
 contentTextarea.addEventListener("input", updateSubmitButtonState);
+
+voteEnabledInput.addEventListener("change", () => {
+  const isEnabled = voteEnabledInput.checked;
+  voteFields.hidden = !isEnabled;
+  [voteQuestionInput, voteOptionAInput, voteOptionBInput].forEach((input) => {
+    input.disabled = !isEnabled;
+  });
+  voteHelper.textContent = "";
+  updateSubmitButtonState();
+  if (isEnabled) voteQuestionInput.focus();
+});
+
+[voteQuestionInput, voteOptionAInput, voteOptionBInput].forEach((input) => {
+  input.addEventListener("input", updateSubmitButtonState);
+});
 
 imageInput.addEventListener("change", () => {
   const file = imageInput.files[0];
@@ -80,7 +116,11 @@ boardCreateForm.addEventListener("submit", async (event) => {
       await createBoard({
           title: titleInput.value.trim(),
           content: contentTextarea.value.trim(),
-          image: selectedImage ? selectedImage.name : null
+          image: selectedImage ? selectedImage.name : null,
+          voteEnabled: voteEnabledInput.checked,
+          voteQuestion: voteEnabledInput.checked ? voteQuestionInput.value.trim() : null,
+          voteOptionA: voteEnabledInput.checked ? voteOptionAInput.value.trim() : null,
+          voteOptionB: voteEnabledInput.checked ? voteOptionBInput.value.trim() : null
       });
 
     alert("게시글이 등록되었습니다.");

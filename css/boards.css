@@ -29,5 +29,5 @@
 .board-card__author-name { font-size:13px; font-weight:700; }
 .board-card__date { margin-left:auto; color:var(--color-muted); font-size:12px; }
 .loading,.board-empty { grid-column:1/-1; padding:60px 0; text-align:center; color:var(--color-muted); font-size:14px; }
-.loading { display:none; }.loading.is-active{display:block;}
+.loading { min-height:72px; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; }.loading.is-active,.loading.is-complete{opacity:1}.loading.is-complete{color:#98a2b3}
 @media(max-width:720px){.boards-page{padding:32px 16px 60px}.boards__hero{align-items:flex-start;flex-direction:column}.write-button{width:100%}.board-list{grid-template-columns:1fr}.board-card__thumb{height:150px}.board-count{display:none}}

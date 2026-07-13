@@ -13,7 +13,7 @@ let currentFilter = "all";
 let loadedCount = 0;
 let hasNextPage = true;
 let isFetching = false;
-let requestVersion = 0;
+let requestVersion = 0; //비동기 요청 결과가 섞이지 않게 하기 위한 변수
 
 function escapeHtml(value) {
   const element = document.createElement("div");
